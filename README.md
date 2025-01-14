@@ -1,5 +1,13 @@
 # Hangout
  HKBU2025-FYP
+
+運行版本
+flutter_windows_3.27.1-stable.zip
+nodejs 20
+psql 15
+
+
+
 感謝大大無私分享, [1/10/2025 1:04 PM]
 競爭力不夠 特色來湊
 
