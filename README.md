@@ -6,6 +6,15 @@ flutter_windows_3.27.1-stable.zip
 nodejs 20
 psql 15
 
+感謝大大無私分享, [1/15/2025 10:15 AM]
+Conceptually & actually
+
+感謝大大無私分享, [1/15/2025 10:15 AM]
+Practically
+
+感謝大大無私分享, [1/15/2025 10:20 AM]
+Every ideology just enhanced 放大了某一種人類社會所需要的factor in the society architecture
+
 
 
 感謝大大無私分享, [1/10/2025 1:04 PM]
