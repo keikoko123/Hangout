@@ -30,6 +30,7 @@ class TasksCubit extends Cubit<TasksState> {
         token: token,
         dueAt: dueAt,
       );
+      // SYNC to offline db
       await taskLocalRepository.insertTask(taskModel);
 
       emit(AddNewTaskSuccess(taskModel));
@@ -51,7 +52,9 @@ class TasksCubit extends Cubit<TasksState> {
   Future<void> syncTasks(String token) async {
     // get all unsynced tasks from our sqlite db
     final unsyncedTasks = await taskLocalRepository.getUnsyncedTasks();
+    print('unsyncedTasks: $unsyncedTasks');
     if (unsyncedTasks.isEmpty) {
+      print('unsyncedTasks is empty, just return-end the function');
       return;
     }
 

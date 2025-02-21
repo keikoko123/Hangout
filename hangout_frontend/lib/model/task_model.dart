@@ -58,7 +58,8 @@ class TaskModel {
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
       'dueAt': dueAt.toIso8601String(),
-      'hexColor': rgbToHex(color),
+      'hexColor':
+          rgbToHex(color), //when we store color in db, we store it as hex
       'isSynced': isSynced,
     };
   }
@@ -72,9 +73,20 @@ class TaskModel {
       createdAt: DateTime.parse(map['createdAt']),
       updatedAt: DateTime.parse(map['updatedAt']),
       dueAt: DateTime.parse(map['dueAt']),
-      color: hexToRgb(map['hexColor']),
+      color: hexToRgb(map[
+          'hexColor']), // when we use color in the app, we convert it to Color from hex string in DB
       isSynced: map['isSynced'] ?? 1,
     );
+    // {
+    //   "id": "8ba1bb47-29f4-475b-ba1a-301d4fccffd1",
+    //   "title": "1",
+    //   "description": "1111",
+    //   "hexColor": "000000",
+    //   "uid": "1f6f747e-7849-46d2-bbd2-10131785cec9",
+    //   "dueAt": "2025-02-04T17:08:55.343Z",
+    //   "createdAt": "2025-02-05T00:57:49.524Z",
+    //   "updatedAt": "2025-02-05T00:57:49.524Z"
+    // },
   }
 
   String toJson() => json.encode(toMap());

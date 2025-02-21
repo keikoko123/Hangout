@@ -20,12 +20,24 @@ class TaskLocalRepository {
     final path = join(dbPath, "tasks.db");
     return openDatabase(
       path,
-      version: 4,
+      version: 2,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < newVersion) {
           await db.execute(
             'ALTER TABLE $tableName ADD COLUMN isSynced INTEGER NOT NULL',
+            // 'DROP TABLE $tableName',
           );
+          // db.execute('''CREATE TABLE $tableName(
+          //   id TEXT PRIMARY KEY,
+          //   title TEXT NOT NULL,
+          //   description TEXT NOT NULL,
+          //   uid TEXT NOT NULL,
+          //   dueAt TEXT NOT NULL,
+          //   hexColor TEXT NOT NULL,
+          //   createdAt TEXT NOT NULL,
+          //   updatedAt TEXT NOT NULL,
+          //   isSynced INTEGER NOT NULL
+          // )''');
         }
       },
       onCreate: (db, version) {
@@ -48,7 +60,9 @@ class TaskLocalRepository {
 
   Future<void> insertTask(TaskModel task) async {
     final db = await database;
+    //! if the task already exists, delete it and insert the new one
     await db.delete(tableName, where: 'id = ?', whereArgs: [task.id]);
+    // should be improved the logic in the function
     await db.insert(tableName, task.toMap());
   }
 
@@ -71,13 +85,15 @@ class TaskLocalRepository {
     final result = await db.query(tableName);
     if (result.isNotEmpty) {
       List<TaskModel> tasks = [];
-      for (final elem in result) {
-        tasks.add(TaskModel.fromMap(elem));
+      for (final task in result) {
+        print(task);
+
+        tasks.add(TaskModel.fromMap(task));
       }
       return tasks;
     }
 
-    return [];
+    return []; //improvement: send a default state task in the view
   }
 
   Future<List<TaskModel>> getUnsyncedTasks() async {
@@ -87,10 +103,12 @@ class TaskLocalRepository {
       where: 'isSynced = ?',
       whereArgs: [0],
     );
+
+    // print(result);
     if (result.isNotEmpty) {
       List<TaskModel> tasks = [];
-      for (final elem in result) {
-        tasks.add(TaskModel.fromMap(elem));
+      for (final task in result) {
+        tasks.add(TaskModel.fromMap(task));
       }
       return tasks;
     }

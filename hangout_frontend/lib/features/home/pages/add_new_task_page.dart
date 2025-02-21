@@ -24,14 +24,16 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
   final formKey = GlobalKey<FormState>();
 
   void createNewTask() async {
+    //!
     if (formKey.currentState!.validate()) {
-      AuthLoggedIn user = context.read<AuthCubit>().state as AuthLoggedIn;
+      AuthLoggedIn loggedStateUser =
+          context.read<AuthCubit>().state as AuthLoggedIn;
       await context.read<TasksCubit>().createNewTask(
-            uid: user.user.id,
+            uid: loggedStateUser.user.id,
             title: titleController.text.trim(),
             description: descriptionController.text.trim(),
             color: selectedColor,
-            token: user.user.token,
+            token: loggedStateUser.user.token,
             dueAt: selectedDate,
           );
     }
@@ -47,6 +49,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //widget 1
       appBar: AppBar(
         title: const Text('Add New Task'),
         actions: [
@@ -100,6 +103,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
             padding: const EdgeInsets.all(20.0),
             child: Form(
               key: formKey,
+              //widget 2
               child: Column(
                 children: [
                   TextFormField(
@@ -115,6 +119,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                     },
                   ),
                   const SizedBox(height: 10),
+                  //widget 3
                   TextFormField(
                     controller: descriptionController,
                     decoration: const InputDecoration(
@@ -129,6 +134,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                     },
                   ),
                   const SizedBox(height: 10),
+                  //widget 4
                   ColorPicker(
                     heading: const Text('Select color'),
                     subheading: const Text('Select a different shade'),
@@ -143,8 +149,9 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
                     },
                   ),
                   const SizedBox(height: 10),
+                  //widget 5
                   ElevatedButton(
-                    onPressed: createNewTask,
+                    onPressed: createNewTask, //!
                     child: const Text(
                       'SUBMIT',
                       style: TextStyle(

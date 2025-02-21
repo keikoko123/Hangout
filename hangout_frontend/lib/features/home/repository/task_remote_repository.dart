@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 class TaskRemoteRepository {
   final taskLocalRepository = TaskLocalRepository();
 
+  // from repository -> send a post request to create a task object
   Future<TaskModel> createTask({
     required String title,
     required String description,
@@ -39,6 +40,7 @@ class TaskRemoteRepository {
 
       return TaskModel.fromJson(res.body);
     } catch (e) {
+      // if offline, try catch to save to local db
       try {
         final taskModel = TaskModel(
           id: const Uuid().v6(),
@@ -51,6 +53,7 @@ class TaskRemoteRepository {
           color: hexToRgb(hexColor),
           isSynced: 0,
         );
+        // SYNC to offline db
         await taskLocalRepository.insertTask(taskModel);
         return taskModel;
       } catch (e) {
@@ -59,6 +62,7 @@ class TaskRemoteRepository {
     }
   }
 
+  // from repository -> send a get request to get all task in one object
   Future<List<TaskModel>> getTasks({required String token}) async {
     try {
       final res = await http.get(
@@ -76,17 +80,17 @@ class TaskRemoteRepository {
       final listOfTasks = jsonDecode(res.body);
       List<TaskModel> tasksList = [];
 
-      for (var elem in listOfTasks) {
-        tasksList.add(TaskModel.fromMap(elem));
+      for (var element in listOfTasks) {
+        tasksList.add(TaskModel.fromMap(element));
       }
-
+      // SYNC to offline db
       await taskLocalRepository.insertTasks(tasksList);
 
       return tasksList;
     } catch (e) {
       final tasks = await taskLocalRepository.getTasks();
       if (tasks.isNotEmpty) {
-        return tasks;
+        return tasks; //rethrow a true result to view by local DB
       }
       rethrow;
     }
@@ -99,7 +103,7 @@ class TaskRemoteRepository {
     try {
       final taskListInMap = [];
       for (final task in tasks) {
-        taskListInMap.add(task.toMap());
+        taskListInMap.add(task.toMap()); //toJson is becoming string format
       }
       final res = await http.post(
         Uri.parse("${Constants.backendUri}/tasks/sync"),

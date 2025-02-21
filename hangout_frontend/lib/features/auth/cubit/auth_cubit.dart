@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hangout_frontend/core/services/sp_service.dart';
+import 'package:hangout_frontend/features/auth/repository/auth_local_repository.dart';
 import 'package:hangout_frontend/features/auth/repository/auth_remote_repository.dart';
 import 'package:hangout_frontend/model/user_model.dart';
 
@@ -8,23 +9,26 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   final authRemoteRepository = AuthRemoteRepository();
-  // final authLocalRepository = AuthLocalRepository();
-  // final spService = SpService();
+  final authLocalRepository = AuthLocalRepository();
+  final spService = SpService();
 
   void getUserData() async {
     try {
       emit(AuthLoading());
       final userModel = await authRemoteRepository.getUserData();
-      print(userModel);
+      print('userModel: ${userModel}');
       if (userModel != null) {
-        // await authLocalRepository.insertUser(userModel);
+        await authLocalRepository.insertUser(userModel);
+        // first: SYNC to offline db , then: change state
         emit(AuthLoggedIn(userModel));
       } else {
         emit(AuthInitial());
       }
     } catch (e) {
-      print(e);
+      // emit(AuthError("27: SomethingWrong !\n" + e.toString()));
+      print("27: $e");
       emit(AuthInitial());
+      // emit(AuthError("27: SomethingWrong !\n" + e.toString()));
     }
   }
 
@@ -44,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSignUp());
     } catch (e) {
       emit(AuthError(
-          "44: SomethingWrong ! $name $email $password" + e.toString()));
+          "44: SomethingWrong ! $name $email $password\n" + e.toString()));
     }
   }
 
@@ -59,11 +63,11 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
       );
 
-      // if (userModel.token.isNotEmpty) {
-      //   await spService.setToken(userModel.token);
-      // }
+      if (userModel.token.isNotEmpty) {
+        await spService.setToken(userModel.token);
+      }
 
-      // await authLocalRepository.insertUser(userModel);
+      await authLocalRepository.insertUser(userModel);
 
       emit(AuthLoggedIn(userModel));
     } catch (e) {

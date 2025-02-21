@@ -7,8 +7,8 @@ import 'package:hangout_frontend/model/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRemoteRepository {
-  // final spService = SpService();
-  // final authLocalRepository = AuthLocalRepository();
+  final spService = SpService();
+  final authLocalRepository = AuthLocalRepository();
 
   Future<UserModel> signUp({
     required String name,
@@ -70,10 +70,13 @@ class AuthRemoteRepository {
 
   Future<UserModel?> getUserData() async {
     try {
-      // final token = await spService.getToken();
-      // if (token == null) {
-      //   return null;
-      // }
+      final token = await spService.getToken();
+
+      print(token);
+      if (token == null) {
+        // throw 'Token is null';
+        return null;
+      }
 
       final res = await http.post(
         Uri.parse(
@@ -81,10 +84,11 @@ class AuthRemoteRepository {
         ),
         headers: {
           'Content-Type': 'application/json',
-          // 'x-auth-token': token,
+          'x-auth-token': token,
         },
       );
 
+      print(res.body);
       if (res.statusCode != 200 || jsonDecode(res.body) == false) {
         return null;
       }
@@ -95,11 +99,11 @@ class AuthRemoteRepository {
         ),
         headers: {
           'Content-Type': 'application/json',
-          // 'x-auth-token': token,
+          'x-auth-token': token,
         },
       );
 
-      print(userResponse.body);
+      print('userResponse.body' + userResponse.body);
 
       if (userResponse.statusCode != 200) {
         throw jsonDecode(userResponse.body)['error'];
@@ -107,9 +111,12 @@ class AuthRemoteRepository {
       return UserModel.fromJson(userResponse.body); //! not res.body
     } catch (e) {
       // print(e);
-      // final user = await authLocalRepository.getUser();
-      // print(user);
-      // return user;
+      final user = await authLocalRepository.getUser();
+      print('user in authLocalRepository: $user');
+      return user;
+
+      // print(e);
+      // return null;
     }
   }
 }

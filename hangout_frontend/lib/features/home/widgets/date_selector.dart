@@ -3,9 +3,9 @@ import 'package:hangout_frontend/core/constants/utils.dart';
 import 'package:intl/intl.dart';
 
 class DateSelector extends StatefulWidget {
-  final DateTime selectedDate;
+  DateTime selectedDate;
   final Function(DateTime) onTap;
-  const DateSelector({
+  DateSelector({
     super.key,
     required this.selectedDate,
     required this.onTap,
@@ -17,6 +17,7 @@ class DateSelector extends StatefulWidget {
 
 class _DateSelectorState extends State<DateSelector> {
   int weekOffset = 0;
+  // DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +67,16 @@ class _DateSelectorState extends State<DateSelector> {
               itemCount: weekDates.length,
               itemBuilder: (context, index) {
                 final date = weekDates[index];
+
                 bool isSelected = DateFormat('d').format(widget.selectedDate) ==
                         DateFormat('d').format(date) &&
                     widget.selectedDate.month == date.month &&
                     widget.selectedDate.year == date.year;
+
                 return GestureDetector(
                   onTap: () => widget.onTap(date),
                   child: Container(
-                    width: 70,
+                    width: 48,
                     margin: const EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(
                       color: isSelected ? Colors.deepOrangeAccent : null,
