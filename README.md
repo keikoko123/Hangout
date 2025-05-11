@@ -1,4 +1,8 @@
 # HKBU2025 FYP Mobile-App Name:  AfterWork / Hangout  
+AfterWork is a transformative lifestyle planning app designed to help busy professionals and urban individuals achieve a fulfilling work-life balance through structured personal growth and efficient time management. 
+
+By integrating AI-powered interest discovery, guided hobby development, and smart daily task optimization, the app empowers users to explore new passions, build meaningful skills, and maximize their leisure time. 
+
 ![AfterWork – Lifestyle Planner An Easy-Plan Easy-Life Platform (1) (2)](https://github.com/user-attachments/assets/fca0ee8b-2c31-45ce-ae6c-5be3129b6604)
 
 
