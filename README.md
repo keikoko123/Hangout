@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 # HKBU2025 FYP Mobile-App 
 # Name:  AfterWork / Hangout  
 
 # a.Running Environment
-=======
 # Hangout
  HKBU2025-FYP
 
 運行版本
->>>>>>> 3eed6c05b6db1f6e3c5c63ce5d2b4cca970beb45
 flutter_windows_3.27.1-stable.zip
 nodejs 20
 psql 15
@@ -44,14 +41,9 @@ STEP 2: CMD: flutter packages get (in pubspec.yaml）
 STEP 3:  Right Click main.dart & Click Build with Debug Mode
 
 # Frontend Deployment Finished
-<<<<<<< HEAD
 
 
 
 
 
 
-
-
-=======
->>>>>>> cfb83814297b089ba8ea5e504ceaba7a7c8f1c74
