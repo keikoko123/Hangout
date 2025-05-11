@@ -1,7 +1,7 @@
-# HKBU2025 FYP Mobile-App 
-# Name:  AfterWork / Hangout  
+# HKBU2025 FYP Mobile-App Name:  AfterWork / Hangout  
+![AfterWork – Lifestyle Planner An Easy-Plan Easy-Life Platform (1) (2)](https://github.com/user-attachments/assets/fca0ee8b-2c31-45ce-ae6c-5be3129b6604)
 
-# a.Running Environment
+a.Running Environment
 # Hangout
  HKBU2025-FYP
 
@@ -10,8 +10,7 @@ flutter_windows_3.27.1-stable.zip
 nodejs 20
 psql 15
 
-<<<<<<< HEAD
-# b. Deployment steps
+b. Deployment steps
 # Backend:
 STEP 1: install nodejs 
  
