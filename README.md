@@ -3,7 +3,6 @@ AfterWork is a transformative lifestyle planning app designed to help busy profe
 
 By integrating AI-powered interest discovery, guided hobby development, and smart daily task optimization, the app empowers users to explore new passions, build meaningful skills, and maximize their leisure time. 
 
-![AfterWork – Lifestyle Planner An Easy-Plan Easy-Life Platform (1) (2)](https://github.com/user-attachments/assets/fca0ee8b-2c31-45ce-ae6c-5be3129b6604)
 
 
 
@@ -59,6 +58,8 @@ Frontend Deployment Finished
 
 # Demo
 https://github.com/user-attachments/assets/34c7ff0d-2961-490c-8d30-8d44eada7afd
+
+![AfterWork – Lifestyle Planner An Easy-Plan Easy-Life Platform (1) (2)](https://github.com/user-attachments/assets/fca0ee8b-2c31-45ce-ae6c-5be3129b6604)
 
 
 
