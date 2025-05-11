@@ -10,6 +10,7 @@ flutter_windows_3.27.1-stable.zip
 nodejs 20
 psql 15
 
+
 b. Deployment steps
 # Backend:
 STEP 1: install nodejs 
@@ -28,7 +29,7 @@ Check Nodejs Server by docker run -p 8000:8000 hangout-backend
 
 Input Initial Hobbies with HobbyObjList.json
 
-# Backend Deployment Finished
+Backend Deployment Finished
 
 
 
@@ -39,7 +40,11 @@ STEP 2: CMD: flutter packages get (in pubspec.yaml）
 
 STEP 3:  Right Click main.dart & Click Build with Debug Mode
 
-# Frontend Deployment Finished
+Frontend Deployment Finished
+
+
+# Demo
+https://github.com/user-attachments/assets/34c7ff0d-2961-490c-8d30-8d44eada7afd
 
 
 
