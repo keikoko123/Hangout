@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 # HKBU2025 FYP Mobile-App 
 # Name:  AfterWork / Hangout  
 
 # a.Running Environment
+=======
+# Hangout
+ HKBU2025-FYP
+
+運行版本
+>>>>>>> 3eed6c05b6db1f6e3c5c63ce5d2b4cca970beb45
 flutter_windows_3.27.1-stable.zip
 nodejs 20
 psql 15
 
+<<<<<<< HEAD
 # b. Deployment steps
 # Backend:
 STEP 1: install nodejs 
