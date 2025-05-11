@@ -20,7 +20,7 @@ class AuthLocalRepository {
     final path = join(dbPath, "auth.db");
     return openDatabase(
       path,
-      version: 2,
+      version: 3,
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < newVersion) {
           await db.execute(
@@ -32,8 +32,16 @@ class AuthLocalRepository {
             email TEXT NOT NULL,
             token TEXT NOT NULL,
             name TEXT NOT NULL,
-            createdAt TEXT NOT NULL,
-            updatedAt TEXT NOT NULL
+            profile_image TEXT,
+            bio TEXT,
+            game_coin INTEGER NOT NULL DEFAULT 0,
+            mbti_e_i_score INTEGER NOT NULL DEFAULT 0,
+            mbti_s_n_score INTEGER NOT NULL DEFAULT 0,
+            mbti_t_f_score INTEGER NOT NULL DEFAULT 0,
+            mbti_j_p_score INTEGER NOT NULL DEFAULT 0,
+            mbti_type TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
           )
     ''');
         }
@@ -45,8 +53,16 @@ class AuthLocalRepository {
             email TEXT NOT NULL,
             token TEXT NOT NULL,
             name TEXT NOT NULL,
-            createdAt TEXT NOT NULL,
-            updatedAt TEXT NOT NULL
+            profile_image TEXT,
+            bio TEXT,
+            game_coin INTEGER NOT NULL DEFAULT 0,
+            mbti_e_i_score INTEGER NOT NULL DEFAULT 0,
+            mbti_s_n_score INTEGER NOT NULL DEFAULT 0,
+            mbti_t_f_score INTEGER NOT NULL DEFAULT 0,
+            mbti_j_p_score INTEGER NOT NULL DEFAULT 0,
+            mbti_type TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
           )
     ''');
       },

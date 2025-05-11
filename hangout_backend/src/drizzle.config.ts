@@ -7,7 +7,7 @@ export default defineConfig({
   dbCredentials: {
     host: "localhost",
     port: 5432,
-    database: "hangoutdb",
+    database: "hangoutdb2",
     user: "postgres",
     password: "test123",
     ssl: false,

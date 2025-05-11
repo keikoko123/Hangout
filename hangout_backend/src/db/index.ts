@@ -3,7 +3,7 @@ import { Pool } from "pg";
 
 export const pool = new Pool({
   // connectionString: process.env.DATABASE_URL,
-  connectionString: "postgresql://postgres:test123@db:5432/hangoutdb",
+  connectionString: "postgresql://postgres:test123@db:5432/hangoutdb2",
   // connectionString: "postgresql://postgres:test123@db:5432/hangoutdb",
 });
 

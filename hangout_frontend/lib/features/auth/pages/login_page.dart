@@ -18,15 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final nameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    // formKey.currentState!.dispose();
-    super.dispose();
-  }
 
   void loginUser() {
     if (formKey.currentState!.validate()) {
@@ -49,11 +41,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           } else if (state is AuthLoggedIn) {
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   const SnackBar(
-            //     content: Text("Login successful!"),
-            //   ),
-            // );
             Navigator.pushAndRemoveUntil(
               context,
               HomePage.route(),
@@ -62,92 +49,231 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         builder: (context, state) {
-          if (state is AuthLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          return Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Hangout  ',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Easy-Plan, Easy-Life',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                      controller: emailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            value == null ||
-                            !value.contains('@')) {
-                          return 'Email filed is invalid';
-                        }
-                        return null;
-                      }),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                      controller: passwordController,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            value == null ||
-                            value.trim().length < 6) {
-                          return 'Password filed is invalid';
-                        }
-                        return null;
-                      }),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                      onPressed: loginUser,
-                      child: const Text('Login',
-                          style: TextStyle(fontSize: 22, color: Colors.white))),
-                  const SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: () =>
-                        {Navigator.of(context).push(SignupPage.route())},
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Don\`t have an account?  ',
-                        style: TextStyle(color: Colors.black),
-                        children: [
-                          TextSpan(
-                            text: 'SIGN-UP',
+          return Container(
+            //!!!!!!!!! MediaQuery
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blue[400]!,
+                  Colors.green[400]!,
+                ],
+              ),
+            ),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // const SizedBox(height: 40),
+                        // Back Button
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: IconButton(
+                        //     icon: const Icon(Icons.arrow_back,
+                        //         color: Colors.white),
+                        //     onPressed: () => Navigator.pop(context),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 60),
+                        // // Welcome Text
+                        // const Text(
+                        //   'Welcome',
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 24,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        Text(
+                          'Afterwork',
+                          style: TextStyle(
+                            fontSize: 65,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Lifestyle Planner  ',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Easy-Plan, Easy-Life',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w200,
+                          ),
+                        ),
+                        // const SizedBox(height: 40),
+                        // Logo Container
+                        // Container(
+                        //   height: 120,
+                        //   width: 120,
+                        //   decoration: BoxDecoration(
+                        //     color: Colors.white,
+                        //     borderRadius: BorderRadius.circular(20),
+                        //   ),
+                        //   child: const Center(
+                        //     child: Icon(
+                        //       Icons.favorite,
+                        //       size: 60,
+                        //       color: Colors.blue,
+                        //     ),
+                        //   ),
+                        // ),
+                        const SizedBox(height: 20),
+                        // Sign In Form
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            // color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withOpacity(0.45),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              TextFormField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  hintText: 'Email',
+                                  filled: true,
+                                  fillColor: Colors.grey[100],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  prefixIcon: const Icon(Icons.email_outlined),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty || !value.contains('@')) {
+                                    return 'Email field is invalid';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              TextFormField(
+                                controller: passwordController,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  hintText: 'Password',
+                                  filled: true,
+                                  fillColor: Colors.grey[100],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  prefixIcon: const Icon(Icons.lock_outline),
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty ||
+                                      value.trim().length < 6) {
+                                    return 'Password must be at least 6 characters';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 24),
+                              ElevatedButton(
+                                onPressed:
+                                    state is AuthLoading ? null : loginUser,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                child: state is AuthLoading
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white)
+                                    : const Text(
+                                        'Sign In',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        // Additional Options
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 1,
+                              width: 100,
+                              color: Colors.white.withOpacity(0.5),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                'or',
+                                style: TextStyle(
+                                  color: Color.from(
+                                      alpha: 1, red: 1, green: 1, blue: 1),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 1,
+                              width: 100,
+                              color: Colors.white.withOpacity(0.5),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.of(context).push(SignupPage.route()),
+                          child: const Text(
+                            'Create new account',
                             style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 25,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           );
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

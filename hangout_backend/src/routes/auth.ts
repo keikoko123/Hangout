@@ -73,7 +73,7 @@ authRouter.post("/login", async (req: Request<{}, {}, LoginBody>, res) => {
       return;
     }
 
-    //! jwt
+    //! jwt token
     const token = jwt.sign({ id: existingUser.id }, "passwordKey");
 
     res.json({ token, ...existingUser });
@@ -93,6 +93,7 @@ authRouter.post("/tokenIsValid", async (req, res) => {
     }
 
     // 2 verify if the token is valid
+    // jwt sign in -> jwt verify out
     const verified = jwt.verify(token, "passwordKey");
 
     if (!verified) {
@@ -106,7 +107,7 @@ authRouter.post("/tokenIsValid", async (req, res) => {
     const [user] = await db
       .select()
       .from(users)
-      .where(eq(users.id, verifiedToken.id));
+      .where(eq(users.id, verifiedToken.id)); //existingUser.id equals to verifiedToken.id
 
     if (!user) {
       res.json(false);

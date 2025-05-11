@@ -7,7 +7,7 @@ services:
     #   - ./backend:/app
     environment:
       - PORT=8000
-      - DATABASE_URL=postgresql://postgres:test123@db:5432/hangoutdb
+      - DATABASE_URL=postgresql://postgres:test123@db:5432/hangoutdb2
 
 
       # - FLASK_APP=app.py
@@ -29,12 +29,12 @@ services:
   #     - "5432:5432"
   db:
     image: postgres:15
-    container_name: postgres_container2
+    container_name: postgres_container3
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: test123
-      POSTGRES_DB: hangoutdb
+      POSTGRES_DB: hangoutdb2
     ports:
       - "5432:5432"
     volumes:

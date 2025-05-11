@@ -6,6 +6,33 @@ import { eq } from "drizzle-orm";
 
 const taskRouter = Router();
 
+//READ ALL
+taskRouter.get("/", auth, async (req: AuthRequest, res) => {
+  try {
+    const allTasks = await db
+      .select()
+      .from(tasks)
+      .where(eq(tasks.uid, req.user!));
+
+    res.json(allTasks);
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+// DELETE
+taskRouter.delete("/", auth, async (req: AuthRequest, res) => {
+  try {
+    const { taskId }: { taskId: string } = req.body;
+    await db.delete(tasks).where(eq(tasks.id, taskId));
+
+    res.json(true);
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+//CREATE
 taskRouter.post("/", auth, async (req: AuthRequest, res) => {
   try {
     req.body = { ...req.body, dueAt: new Date(req.body.dueAt), uid: req.user };
@@ -20,30 +47,7 @@ taskRouter.post("/", auth, async (req: AuthRequest, res) => {
   }
 });
 
-taskRouter.get("/", auth, async (req: AuthRequest, res) => {
-  try {
-    const allTasks = await db
-      .select()
-      .from(tasks)
-      .where(eq(tasks.uid, req.user!));
-
-    res.json(allTasks);
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-});
-
-taskRouter.delete("/", auth, async (req: AuthRequest, res) => {
-  try {
-    const { taskId }: { taskId: string } = req.body;
-    await db.delete(tasks).where(eq(tasks.id, taskId));
-
-    res.json(true);
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-});
-
+// CREATE WITH SYNC
 taskRouter.post("/sync", auth, async (req: AuthRequest, res) => {
   try {
     // req.body = { ...req.body, dueAt: new Date(req.body.dueAt), uid: req.user };
