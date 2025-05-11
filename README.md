@@ -44,6 +44,7 @@ STEP 2: CMD: flutter packages get (in pubspec.yaml）
 STEP 3:  Right Click main.dart & Click Build with Debug Mode
 
 # Frontend Deployment Finished
+<<<<<<< HEAD
 
 
 
@@ -52,3 +53,5 @@ STEP 3:  Right Click main.dart & Click Build with Debug Mode
 
 
 
+=======
+>>>>>>> cfb83814297b089ba8ea5e504ceaba7a7c8f1c74
