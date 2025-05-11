@@ -1,18 +1,14 @@
 # HKBU2025 FYP Mobile-App Name:  AfterWork / Hangout  
 ![AfterWork – Lifestyle Planner An Easy-Plan Easy-Life Platform (1) (2)](https://github.com/user-attachments/assets/fca0ee8b-2c31-45ce-ae6c-5be3129b6604)
 
-a.Running Environment
-# Hangout
- HKBU2025-FYP
-
-運行版本
-flutter_windows_3.27.1-stable.zip
-nodejs 20
-psql 15
 
 
-b. Deployment steps
-# Backend:
+# a.Running Environment
+![Screenshot 2025-05-11 235755](https://github.com/user-attachments/assets/b4af28d6-4006-459b-95eb-b31abef7f7cb)
+
+
+# b. Deployment steps
+#### Backend:
 STEP 1: install nodejs 
  
 STEP 2: use nodejs & npm install TypeScript-libraries (e.g: CMD: npm install ts-node --save-dev, npm i -D drizzle-kit)
@@ -33,7 +29,7 @@ Backend Deployment Finished
 
 
 
-# Frontend:
+#### Frontend:
 STEP 1: install Dart and flutter with specific version (flutter_windows_3.27.1-stable.zip)
 
 STEP 2: CMD: flutter packages get (in pubspec.yaml）
