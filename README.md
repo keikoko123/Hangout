@@ -4,7 +4,21 @@
 
 
 # a.Running Environment
-![Screenshot 2025-05-11 235755](https://github.com/user-attachments/assets/b4af28d6-4006-459b-95eb-b31abef7f7cb)
+#### Standard Client 	
+Android / iOS by Flutter	
+Minimum Android version: 10
+Maximum Android version: 14
+SQLite
+
+#### Application Server
+JavaScript & TypeScript (Nodejs)
+Docker（Linux Containers）
+
+#### Database Server
+PostgreSQL
+Docker（Linux Containers）
+
+
 
 
 # b. Deployment steps
